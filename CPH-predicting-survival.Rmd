@@ -14,7 +14,8 @@ dat$sex <- factor(dat$sex)
 
 ```{r}
 pred.NA <- survfit(Surv(time, status) ~ sex, data = dat, type = "fh")
-plot(pred.NA, col = 1:2)
+pred.NA
+plot(pred.NA, col = c(1,2))
 ```
 
 ```{r}
