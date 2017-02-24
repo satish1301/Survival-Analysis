@@ -1,0 +1,37 @@
+---
+title: "Cox Proportional Hazards model: case studies"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+library(survival)
+
+dat <- lung
+dat$sex <- factor(dat$sex)
+```
+
+```{r}
+pred.NA <- survfit(Surv(time, status) ~ sex, data = dat, type = "fh")
+plot(pred.NA, col = 1:2)
+```
+
+```{r}
+fit.cph <- coxph(Surv(time, status) ~ sex, data = dat)
+
+pred.cph <- survfit(fit.cph, newdata = data.frame(sex = factor(1:2)),
+                    type = "aalen")
+
+plot(pred.cph, col = 1:2)
+```
+
+How does the proportional hazards assumption hold?
+
+```{r}
+plot(pred.NA, fun = "cloglog", col = 1:2)
+```
+
+```{r}
+plot(pred.cph, fun = "cloglog", col = 1:2)
+```
