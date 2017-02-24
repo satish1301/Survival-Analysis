@@ -16,7 +16,7 @@ dat$sex <- factor(dat$sex)
 pred.NA <- survfit(Surv(time, status) ~ sex, data = dat, type = "fh")
 pred.NA
 str(pred.NA)
-pred.NA$n.censor
+pred.NA$time
 plot(pred.NA, col = c(1,2))
 ```
 
